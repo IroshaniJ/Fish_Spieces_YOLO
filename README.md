@@ -13,7 +13,13 @@ To test the model on a video stream, run the following command:
 
 ```bash
 python3 test.py
+```
 
+To test the model on a live youtube video stream, run the following command:
+
+```bash
+python3 test_live.py
+```
 
 ### Key Features:
 - Uses **YOLO** object detection model.
@@ -23,7 +29,7 @@ This format is GitHub-friendly and follows standard `README.md` conventions. Let
 
 ## Based on:
 https://zenodo.org/records/10932673
-```
+
 
 You might want to install ffmpeg for the youtube live stream part.
 
