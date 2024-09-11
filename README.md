@@ -23,3 +23,10 @@ This format is GitHub-friendly and follows standard `README.md` conventions. Let
 
 ## Based on:
 https://zenodo.org/records/10932673
+```
+
+You might want to install ffmpeg for the youtube live stream part.
+
+```bash
+brew install ffmpeg
+```
