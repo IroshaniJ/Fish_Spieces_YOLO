@@ -1,31 +1,32 @@
 # Fish Species Identification in Video Stream Using YOLO Model
 
-This project uses a YOLO model trained to identify four fish species:
+This project uses a finetuned YOLO model to identify different fish species living in Oslofjord including fish spieces such as:
 
-- **Carcinus maenas** (European Green Crab)
 - **Ctenolabrus rupestris** (Goldsinny Wrasse)
-- **Gobius niger** (Black Goby)
-- **Neogobius melanostomus** (Round Goby)
+- **Gadus morhua** (Atlantic cod)
+- **Ascidiacea** (Sea Squirt)
+- **Asteroidea** (Starfish)
+
 
 ## Usage
 
-To test the model on a video stream, run the following command:
-
+To detect fish using the model on a video stream, run the following command:
 ```bash
 python3 test.py
 ```
+You must modify the file to add video_path and output_path
 
-To test the model on a live youtube video stream, run the following command:
+
+To detect fish using the model on a live youtube video stream, run the following command:
 
 ```bash
 python3 test_live.py
 ```
+You must modify the file to add link to youtube video (url)
 
 ### Key Features:
-- Uses **YOLO** object detection model.
+- Uses **YOLO** object detection model. The model is finetuned on the model at https://zenodo.org/records/10932673 created by https://dto-bioflow.eu/
 - Trained to recognize **four distinct species** in video streams.
-
-This format is GitHub-friendly and follows standard `README.md` conventions. Let me know if you'd like any further tweaks!
 
 ## Based on:
 https://zenodo.org/records/10932673
