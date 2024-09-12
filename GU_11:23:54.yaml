@@ -1,9 +1,0 @@
-names:
-- european_green_crab
-- black_goby
-- round_goby
-- goldsinny_wrasse
-nc: 4
-path: /data/album/kso/GU_model
-train: train.txt
-val: valid.txt

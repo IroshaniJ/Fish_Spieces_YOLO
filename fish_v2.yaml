@@ -1,0 +1,10 @@
+names:
+- european_green_crab
+- black_goby
+- round_goby
+- goldsinny_wrasse
+- cod
+nc: 5
+path: ./model
+train: train.txt
+val: valid.txt

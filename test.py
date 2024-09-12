@@ -6,7 +6,7 @@ import yaml
 import random
 
 # Read the YAML file
-file_path = "GU_11:23:54.yaml"
+file_path = "fish_v3.yaml"
 with open(file_path, 'r') as file:
     data = yaml.safe_load(file)
 
@@ -15,7 +15,7 @@ with open(file_path, 'r') as file:
 names = data['names']
 
 # Define fixed colors
-color_list = ['red', 'green', 'blue', 'yellow']
+color_list = ['red', 'green', 'blue', 'yellow', "orange"]
 
 # Create a dictionary assigning colors to species in order
 colors = {name: color_list[i % len(color_list)] for i, name in enumerate(names)}
@@ -69,14 +69,13 @@ def test_video(video_path, output_path, model):
                     rgb_color = ImageColor.getcolor(color, "RGB")
                     bgr_color = (rgb_color[2], rgb_color[1], rgb_color[0])
                     text = f"{label} {confidence:.2f}"
-                    #if confidence > 0.65:
-                    cv2.rectangle(frame, (r[0], r[1]), (r[2], r[3]), bgr_color, 2)
-                    font_scale = 0.5  # Smaller font size
-                    thickness = 1     # Adjust thickness as needed
-                    cv2.putText(frame, text, (r[0], r[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, font_scale, bgr_color, thickness)
-                    # save the image
-                    if confidence > 0.75:
-                        file_name = str(count)+'.jpg'
+                    
+                    if (class_id==6 and confidence > 0.05) or confidence > 0.45:
+                        cv2.rectangle(frame, (r[0], r[1]), (r[2], r[3]), bgr_color, 2)
+                        font_scale = 0.5  # Smaller font size
+                        thickness = 1     # Adjust thickness as needed
+                        cv2.putText(frame, text, (r[0], r[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, font_scale, bgr_color, thickness)
+                        file_name = './test_images/'+ str(count)+'.jpg'
                         cv2.imwrite(file_name,frame)
 
                     print(f"Detected {label} with confidence {confidence:.2f}")
@@ -94,9 +93,9 @@ def test_video(video_path, output_path, model):
     return output_path
 
 def main():
-    video_path = "../clip2.mp4"
-    output_path = "output2_fintunedv1.avi"
-    model_path = "models/weights/best.pt"
+    video_path = "./videos/clip4.mp4"
+    output_path = "./output_videos/output4_fintunedv3.avi"
+    model_path = "models/weights_v3/best.pt"
     model = YOLO(model_path)
     test_video(video_path, output_path, model)
 

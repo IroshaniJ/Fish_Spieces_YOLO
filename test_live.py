@@ -10,7 +10,7 @@ import random
 
 
 # Read the YAML file
-file_path = "GU_11:23:54_v2.yaml"
+file_path = "fish_v3.yaml"
 with open(file_path, 'r') as file:
     data = yaml.safe_load(file)
 
@@ -18,7 +18,7 @@ with open(file_path, 'r') as file:
 names = data['names']
 
 # Define fixed colors
-color_list = ['red', 'green', 'blue', 'yellow']
+color_list = ['red', 'green', 'blue', 'yellow', 'orange']
 
 # Create a dictionary assigning colors to species in order
 colors = {name: color_list[i % len(color_list)] for i, name in enumerate(names)}
@@ -60,11 +60,15 @@ def test_video(video_url, model):
                     text = f"{label} {confidence:.2f}"
                     
                     # Draw bounding box and label if confidence is above the threshold
-                    if confidence > 0.20:
+                    if (class_id==6 and confidence > 0.05) or confidence > 0.45:
                         cv2.rectangle(frame, (r[0], r[1]), (r[2], r[3]), bgr_color, 2)
                         font_scale = 0.5
                         thickness = 1
                         cv2.putText(frame, text, (r[0], r[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, font_scale, bgr_color, thickness)
+                        file_name = './test_images/' + str(count)+'.jpg'
+                        cv2.imwrite(file_name,frame)
+                    
+                    
 
             # Display the frame with YOLO detections
             cv2.imshow('YOLO Object Detection', frame)
@@ -80,7 +84,7 @@ def test_video(video_url, model):
 
 def main():
     # URL of the YouTube video stream
-    url = "https://www.youtube.com/watch?v=ssiZXK7mvJM"
+    url = "https://www.youtube.com/watch?v=gepW3BA7Kro"
 
     # Extract video stream URL using yt-dlp
     ydl_opts = {'format': 'best', 'noplaylist': True}
@@ -93,7 +97,7 @@ def main():
     stream = streams["best"]
 
     # Load the YOLO model
-    model_path = "models/weights_v2/best.pt"
+    model_path = "models/weights_v3/best.pt"
     model = YOLO(model_path)
 
     # Test the YOLO model on the real-time video stream
